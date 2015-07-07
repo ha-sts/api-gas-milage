@@ -1,21 +1,24 @@
 #!/usr/bin/env python
 
 ### IMPORTS ###
-from flask import Flask
+import json
+
+from flask import Blueprint, render_template, abort
+from jinja2 import TemplateNotFound
 
 ### GLOBALS ###
-app = Flask( __name__)
+gasmilage = Blueprint( 'gasmilage', __name__, template_folder = 'templates')
 
 ### FUNCTIONS ###
-@app.route( '/')
-def hello():
-    return "Hello World!"
+@gasmilage.route( '/')
+def show():
+    try:
+        return render_template( 'index.html')
+    except TemplateNotFound:
+        abort( 404)
 
 ### CLASSES ###
 
 ### MAIN ###
-def main():
-    app.run()
-
 if __name__ == '__main__':
-    main()
+    pass
